@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Loto</title>
+    <link rel="stylesheet" hr
+    ef="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="comprobar(), neon()">
+    <div class="h-screen w-screen bg-gray-200 flex flex-col justify-center items-center">
+        <div id="border" class="mb-32 border-8 border-yellow-500 rounded-3xl shadowYellow">
+            <p class="text-9xl font-extrabold p-10">SECURE&nbsp;&nbsp;&nbsp;LOTO</p>
+        </div>
+        <div id="mainContainer" class="flex flex-row text-8xl w-4/5 h-32 justify-between green">
+
+        </div>  
+        <div class="flex flex-row justify-end w-10/12">
+            <div class="flex flex-col items-end">
+                <p class="mt-16 text-4xl font-extrabold">Reintegro 100% ASEGURADO</p>
+                <p class="">*This is not a pyramid scheme</p>
+            </div>
+            <img src="assets/pipBoy2.gif" width="250" height="300">
+        </div>
+    </div>
+
+    <script>
+        let obj
+
+        /*function comprobar() {
+            fetch('http://localhost:4000/')
+            .then(res => res.json())
+            .then(data => obj = data)
+            .then(fill())
+            .console.log(obj)
+        }*/
+
+        async function comprobar() {
+            const response = await fetch('http://localhost:4000/');
+            const json = await response.json();
+            await fill(json)
+            console.log(json.res[1])
+        }
+
+        /* async function comprobar() {
+            const response = await fetch('http://localhost:4000');
+            const final = await response.json
+            console.log(final);
+        } */
+
+        let on = false
+        const borderOn = 'mb-32 border-8 border-yellow-500 rounded-3xl shadowYellow'
+        const borderOff = 'mb-32 border-8 border-yellow-500 rounded-3xl'
+
+        function neon() {
+            if (on === true) {
+                document.getElementById('border').className = borderOff
+                on = false
+                setTimeout(() => {  neon() }, 1000)
+            }
+            else {
+                document.getElementById('border').className = borderOn
+                on = true
+                setTimeout(() => { neon() }, 1000)
+            }
+        }
+
+        function fill(json) {
+            for (let i = 0; i <= 5; i ++) {
+                document.getElementById('mainContainer').innerHTML+= '<div class="bg-white shadow-2xl rounded-full w-1/12 h-full flex justify-center items-center">' + json.res[i] + '</div>'
+            }
+            document.getElementById('mainContainer').innerHTML+= '<div class="bg-white shadow-2xl rounded-full w-1/12 h-full flex justify-center items-center shadowGreen">' + json.res[6] + '</div>'
+        }
+
+    </script>
+</body>
+</html>

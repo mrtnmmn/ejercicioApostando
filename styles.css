@@ -1,0 +1,11 @@
+.shadowYellow {
+    box-shadow: 0px 0px 50px 5px #FFCE00, 0px 0px 15px 5px #FFCE00 inset;
+}
+
+.shadowGreen {
+    box-shadow: 0px 0px 25px 5px #41b300;
+}
+
+.green {
+    color: #41b300;
+}
